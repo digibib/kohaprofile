@@ -25,6 +25,10 @@ Output is done as an HTML file, which shows a table of the average times for
 each commit and test. The oldest commit is shown at the top and the newest 
 commit is at the bottom. 
 
+The idea here is to see how performance changes over time, and spot both 
+negative and positie trends, as well as any commits that lead to dramatic 
+changes in performance. 
+
 =head1 CONFIGURATION
 
 The configuration is stored in a YAML file, see that default-config.yaml that
