@@ -1,0 +1,42 @@
+---
+
+# Base URL of the OPAC for the installation you want to test
+# Include trailing slash. 
+opac: "http://kohadev/"
+
+# biblionumber for a record that you can view in the OPAC
+opac_biblionumber: 1
+
+# Base URL of the Intranet. Include trailing slash. 
+intranet: "http://kohadev:8080/"
+
+# Path to the Koha Git repository that you want to run your tests on. 
+# The URLs you have given above MUST be running out of this repo for things
+# to work. The recommended way to do this is to have a package-based install
+# which has been "gitified". 
+repo: "/home/magnus/scripts/kohatest"
+
+# The branch in the repo that you want to test. This will probably be "master".
+branch: "master"
+
+# How many commits should we include? This will count backwards from HEAD
+max_count: 3
+
+# How many times should we test each URL? The higher this number is, the more
+# statstically significant our results will be. 
+iterations: 2
+
+# What should we actually measure? CURRENTLY NOT IMPLEMENTED!
+# Possible values (from http://search.cpan.org/~lbrocard/WWW-Mechanize-Timed-0.44/lib/WWW/Mechanize/Timed.pm):
+# 
+# client_request_connect_time  - The time it took to connect to the remote server.
+# client_request_transmit_time - The time it took to transmit the request.
+# client_response_server_time  - Time it took to respond to the request.
+# client_response_receive_time - Time it took to get the data back. "The most 
+#                                useful method is client_response_receive_time, 
+#                                or how long it took to get the data from the 
+#                                webserver once the response was made"
+# client_total_time            - Total time taken for each of the 4 stages above.
+# client_elapsed_time          - Total time taken to make the WWW::Mechanize::get 
+#                                request, as perceived by the calling program.
+method: client_response_receive_time
