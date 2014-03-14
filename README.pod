@@ -25,6 +25,18 @@ changes in performance.
 The configuration is stored in a YAML file, see that default-config.yaml that
 accompanies this script for an example. 
 
+=head1 IDEAS
+
+=over 4
+
+=item * Add some kind of progress indicator
+
+=item * Make it possible to run the tests against just one URL, or a user configurable list
+
+=item * Output the data in a way that can be rendered as a pretty graph
+
+=back
+
 =head1 AUTHOR
 
 Magnus Enger
