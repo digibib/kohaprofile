@@ -11,29 +11,6 @@ performance tests for each new commit.
 
     perl run_tests.pl -c myconfig.yaml -v > /tmp/kohaprof.html
 
-=head1 DESCRIPTION
-
-This script uses a git repo and a Koha instance running off that Git repo. It 
-will step x commits back in time, run some tests/benchmarks against the 
-insallation, step one commit forward in time, run the tests again, step forward, 
-run the tests an so on, until it reaches the most recent commit. 
-
-Several iterations of the tests can be done per commit, and the times measured
-for each iteration will be averaged. 
-
-Output is done as an HTML file, which shows a table of the average times for 
-each commit and test. The oldest commit is shown at the top and the newest 
-commit is at the bottom. 
-
-The idea here is to see how performance changes over time, and spot both 
-negative and positie trends, as well as any commits that lead to dramatic 
-changes in performance. 
-
-=head1 CONFIGURATION
-
-The configuration is stored in a YAML file, see that default-config.yaml that
-accompanies this script for an example. 
-
 =cut
 
 use Getopt::Long;

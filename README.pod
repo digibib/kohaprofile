@@ -1,3 +1,54 @@
-=head1 DOCUMENTATION
+=head1 NAME
 
-See "perldoc kohaprof.pl"
+kohaprofile
+
+=head1 DESCRIPTION
+
+This script uses a git repo and a Koha instance running off that Git repo. It 
+will step x commits back in time, run some tests/benchmarks against the 
+insallation, step one commit forward in time, run the tests again, step forward, 
+run the tests an so on, until it reaches the most recent commit. 
+
+Several iterations of the tests can be done per commit, and the times measured
+for each iteration will be averaged. 
+
+Output is done as an HTML file, which shows a table of the average times for 
+each commit and test. The oldest commit is shown at the top and the newest 
+commit is at the bottom. 
+
+The idea here is to see how performance changes over time, and spot both 
+negative and positie trends, as well as any commits that lead to dramatic 
+changes in performance. 
+
+=head1 CONFIGURATION
+
+The configuration is stored in a YAML file, see that default-config.yaml that
+accompanies this script for an example. 
+
+=head1 AUTHOR
+
+Magnus Enger
+
+=head1 REPOSITORY
+
+https://github.com/MagnusEnger/kohaprofile
+
+Patches and pull requests are most welcome! 
+
+=head1 LICENSE
+
+This is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This file is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this file; if not, write to the Free Software
+Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+=cut
