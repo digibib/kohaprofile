@@ -1,15 +1,15 @@
 #!/usr/bin/perl 
 
-# Copyright 2014 Magnus Enger Libriotech
+# Copyright 2014, Oslo Public Library
 
 =head1 NAME
 
-run_tests.pl - Go back in Git-time, then walk towards the present and run 
+kohaprofile.pl - Go back in Git-time, then walk towards the present and run 
 performance tests for each new commit.
 
 =head1 SYNOPSIS
 
-    perl run_tests.pl -c myconfig.yaml -v > /tmp/kohaprof.html
+    perl kohaprofile.pl -c myconfig.yaml -v > /tmp/kohaprof.html
 
 =cut
 
@@ -98,7 +98,7 @@ my $ttconfig = {
     ENCODING => 'utf8' # ensure correct encoding
 };
 my $tt2 = Template->new( $ttconfig ) || die Template->error(), "\n";
-$tt2->process( 'kohaprof.tt', { 'tests' => \@results, 'config' => $config } ) || die $tt2->error();
+$tt2->process( 'kohaprofile.tt', { 'tests' => \@results, 'config' => $config } ) || die $tt2->error();
 
 say STDERR Dumper \@results if $debug;
 
@@ -111,7 +111,7 @@ $git->checkout( 'master' );
 
 =item B<-c --config>
 
-Path to config file, if you want to use another config file than the defaul one.
+Path to config file, if you want to use another config file than the default one.
 
 =item B<-v --verbose>
 
@@ -152,11 +152,15 @@ sub get_options {
 
 =head1 AUTHOR
 
-Magnus Enger
+=over 4
+
+=item * Magnus Enger, Oslo Public Library
+
+=back
 
 =head1 REPOSITORY
 
-https://github.com/MagnusEnger/kohaprofile
+https://github.com/digibib/kohaprofile
 
 Patches and pull requests are most welcome! 
 
