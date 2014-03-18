@@ -40,6 +40,10 @@ The configuration is stored in a YAML file, see default-config.yaml for an examp
 
 =item * Improve the statistics around the time measurements (e.g. remove the fastest and the slowest response)
 
+=item * Save the data about tests in a database, so we can build up lots of data over time
+
+=item * Create a Dancer-app or something similar that can query the database and display data dynamically
+
 =back
 
 =head1 AUTHOR
