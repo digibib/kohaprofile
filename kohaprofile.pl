@@ -150,20 +150,6 @@ sub get_options {
 
 }
 
-=head1 AUTHOR
-
-=over 4
-
-=item * Magnus Enger, Oslo Public Library
-
-=back
-
-=head1 REPOSITORY
-
-https://github.com/digibib/kohaprofile
-
-Patches and pull requests are most welcome! 
-
 =head1 LICENSE
 
 This is free software; you can redistribute it and/or modify it

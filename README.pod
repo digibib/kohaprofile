@@ -39,11 +39,15 @@ accompanies this script for an example.
 
 =head1 AUTHOR
 
-Magnus Enger
+=over 4
+
+=item * Magnus Enger, Oslo Public Library
+
+=back
 
 =head1 REPOSITORY
 
-https://github.com/MagnusEnger/kohaprofile
+https://github.com/digibib/kohaprofile
 
 Patches and pull requests are most welcome! 
 
