@@ -17,7 +17,7 @@ each commit and test. The oldest commit is shown at the top and the newest
 commit is at the bottom. 
 
 The idea here is to see how performance changes over time, and spot both 
-negative and positie trends, as well as any commits that lead to dramatic 
+negative and positive trends, as well as any commits that lead to dramatic 
 changes in performance. 
 
 =head1 CONFIGURATION
