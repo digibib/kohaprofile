@@ -22,8 +22,7 @@ changes in performance.
 
 =head1 CONFIGURATION
 
-The configuration is stored in a YAML file, see that default-config.yaml that
-accompanies this script for an example. 
+The configuration is stored in a YAML file, see default-config.yaml for an example. 
 
 =head1 IDEAS
 
@@ -33,7 +32,13 @@ accompanies this script for an example.
 
 =item * Make it possible to run the tests against just one URL, or a user configurable list
 
+=item * Use the scripts in misc/load_testing/ for performing the tests
+
+=item * Include transactions in the staff interface, like check out and check in
+
 =item * Output the data in a way that can be rendered as a pretty graph
+
+=item * Improve the statistics around the time measurements (e.g. remove the fastest and the slowest response)
 
 =back
 
