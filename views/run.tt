@@ -1,4 +1,25 @@
 <h1>Run #[% run.id %] started [% run.started %] on [% run.branch %]</h1>
+<h2>[% params.method %]</h2>
+
+<script type="text/javascript">
+
+    $( document ).ready(function() {
+
+        $.getJSON( "/api/run/[% params.id %]/[% params.method %]", function( data ) {
+            var placeholder = $("#graph");
+            var options = {
+                lines: { show: true },
+                points: { show: true },
+                xaxis: { tickDecimals: 0, tickSize: 1 }
+            };
+    		$.plot(placeholder, data, options);
+		});
+
+	});
+
+</script>
+
+<div id="graph" style="width:600px;height:300px"></div>
 
 [% IF run.datapoints.size %]
     <table border="1">

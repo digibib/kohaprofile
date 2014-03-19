@@ -25,11 +25,9 @@
     </div>
 
 
-    <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
-      <div class="container">
-        <p><a href="https://github.com/digibib/kohaprofile">KohaProfile</a>, powered by <a href="http://getbootstrap.com/">Bootstrap</a> and <a href="http://perldancer.org/">Dancer2</a> v[% dancer_version %].</p>
-      </div>
-    </nav>
+<div class="footer">
+    <p><a href="https://github.com/digibib/kohaprofile">KohaProfile</a>, powered by <a href="http://getbootstrap.com/">Bootstrap</a> and <a href="http://perldancer.org/">Dancer2</a> v[% dancer_version %].</p>
+</div>
 
   </body>
 </html>
