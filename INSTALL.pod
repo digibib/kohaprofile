@@ -1,0 +1,38 @@
+=pod
+
+=head1 INTRODUCTION
+
+This will walk you through installing and configuring B<kohaprofile>.
+
+=head1 CODE
+
+Clone the Git repo and move into it:
+
+    $ git clone https://github.com/digibib/kohaprofile.git
+    $ cd kohaprofile
+
+=head1 DATABASE
+
+B<kohaprofile> uses a MySQL database to store and query data. 
+
+=head2 Create the database
+
+Login to MySQL as the I<root> user:
+
+    $ mysql -u root -p
+
+Issue these commands, replacing I<kohaprofile> and I<pass> if you want to use
+values other than the defaults:
+
+    mysql> create database kohaprofile;
+    mysql> grant all on kohaprofile.* to 'kohaprofile'@'localhost' identified by 'pass';
+    mysql> flush privileges;
+    mysql> exit
+
+=head2 Initialize the database
+
+Run this command:
+
+    $ mysql -u kohaprofile -p kohaprofile < db/db.sql
+    
+=cut
