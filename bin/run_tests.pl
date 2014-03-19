@@ -22,7 +22,6 @@ use FindBin;
 use Git::Wrapper;
 use WWW::Mechanize::Timed;
 use Math::NumberCruncher;
-use Template;
 use Modern::Perl;
 
 # Get options
@@ -91,14 +90,6 @@ while ( @shas ) {
     push @results, \%summary;
     
 }
-
-# Configure and create Template Toolkit 
-my $ttconfig = {
-    INCLUDE_PATH => '',
-    ENCODING => 'utf8' # ensure correct encoding
-};
-my $tt2 = Template->new( $ttconfig ) || die Template->error(), "\n";
-$tt2->process( 'kohaprofile.tt', { 'tests' => \@results, 'config' => $config } ) || die $tt2->error();
 
 say STDERR Dumper \@results if $debug;
 
