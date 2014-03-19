@@ -1,1 +1,22 @@
 <h1>Runs</h1>
+
+<table>
+<tr>
+    <th>ID</th>
+    <th>Started</th>
+    <th>Branch</th>
+    <th>Method</th>
+</tr>
+[% FOREACH run IN runs %]
+<tr>
+    <td>[% run.id %]</td>
+    <td>[% run.started %]</td>
+    <td>[% run.branch %]</td>
+    <td>
+        [% FOREACH method IN [ "client_request_connect_time" "client_request_transmit_time" "client_response_server_time" "client_response_receive_time" "client_total_time" "client_elapsed_time" ] %]
+            <a href="/run/[% run.id %]/[% method %]">[% method %]</a> | 
+        [% END %]
+    </td>
+</tr>
+[% END %]
+</table>

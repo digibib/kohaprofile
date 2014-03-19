@@ -19,3 +19,15 @@ show_errors: 1
 
 # print the banner
 startup_info: 1
+
+plugins:
+    DBIC:
+        default:
+            dsn:  dbi:mysql:kohaprofile
+            schema_class: KohaProfile::Schema
+            user: kohaprofile
+            pass: pass
+            options:
+                RaiseError: 1
+                PrintError: 1
+                mysql_enable_utf8: 1

@@ -13,6 +13,10 @@ performance tests for each new commit.
 
 =cut
 
+use Dancer2;
+use Dancer2::Plugin::DBIC;
+use lib 'lib';
+
 use Getopt::Long;
 use Data::Dumper;
 use Pod::Usage;
@@ -21,7 +25,6 @@ use DateTime;
 use FindBin;
 use Git::Wrapper;
 use WWW::Mechanize::Timed;
-use Math::NumberCruncher;
 use Modern::Perl;
 
 # Get options
@@ -50,48 +53,55 @@ my $timer = WWW::Mechanize::Timed->new();
 my $git = Git::Wrapper->new( $config->{'repo'} );
 $git->checkout( $config->{'branch'} );
 
+# Record the run in the database
+my $run = resultset('Run')->create({
+    branch => $config->{'branch'},
+});
+
 # Get the commits we want and walk through them
 my @shas = $git->rev_list( { max_count => $config->{'max_count'} }, 'HEAD' );
-my @results;
 while ( @shas ) {
 
-    # Get the SHA of the current 
+    # Get the SHA of the current commit
     my $sha = pop @shas;
     say STDERR $sha if $verbose;
     # Check ut this SHA
     $git->checkout( $sha );
+    # Record the SHA in the database
+    my $db_sha = resultset('Commit')->update_or_new({
+        sha => $sha,
+    });
+    if (!$db_sha->in_storage) {
+        # FIXME Get the title for the commit
+        $db_sha->set_column( 'title', 'FIXME' );
+        $db_sha->insert;
+    }
 
     # Run the timers
-    my %iter_results;
     for ( 1..$config->{ 'iterations' } ) {
 
         # Loop over the URLs we want to test
-        foreach my $key ( sort keys %urls ) {
-            my $url = $urls{ $key };
-            say STDERR "Looking at $key : $url" if $debug;
+        foreach my $test_name ( sort keys %urls ) {
+            my $url = $urls{ $test_name };
+            say STDERR "Looking at $test_name : $url" if $debug;
             # Access the URL
             $timer->get( $url );
-            # FIXME IS it possible to set the method here based on the config?
-            my $time = $timer->client_response_receive_time;
-            say STDERR $time if $debug;
-            # Save the time
-            push @{ $iter_results{ $key } }, $time;
+            # Record each of the datapoints in the database
+            foreach my $method ( qw( client_request_connect_time client_request_transmit_time client_response_server_time client_response_receive_time client_total_time client_elapsed_time ) ) {
+                my $datapoint = resultset('Datapoint')->create({
+                    run_id => $run->id,
+                    sha    => $sha,
+                    name   => $test_name,
+                    method => $method,
+                    value  => $timer->$method,
+                });
+                say STDERR "$method: " . $timer->$method if $debug;
+            }
         }
         
     }
     
-    # Summarize the results for all the runs on this SHA
-    my %summary = ( 'sha' => $sha );
-    foreach my $test ( sort keys %iter_results ) {
-        my $average = Math::NumberCruncher::Mean( \@{ $iter_results{ $test } } );
-        say STDERR "$test: $average" if $verbose;
-        $summary{ $test } = $average;
-    }
-    push @results, \%summary;
-    
 }
-
-say STDERR Dumper \@results if $debug;
 
 # Clean up
 $git->checkout( 'master' );

@@ -1,0 +1,29 @@
+<h1>Run #[% run.id %] started [% run.started %] on [% run.branch %]</h1>
+
+[% IF run.datapoints.size %]
+    <table border="1">
+    <tr>
+        <th>Commit ID</th><th></th><th></th>
+        <th>opac</th>
+        <th>opac_detail</th>
+        <th>intra</th>
+    </tr>
+    [% SET current_sha = '' %]
+    [% FOREACH d IN datapoints %]
+        [% IF d.sha.sha != current_sha %]
+        <tr>
+            <td>[% d.sha.sha.substr(0,8) %]</td>
+            <td><a href="http://git.koha-community.org/gitweb/?p=koha.git;a=commit;h=[% d.sha.sha %]" title="commit">c</a></td>
+            <td><a href="http://git.koha-community.org/gitweb/?p=koha.git;a=patch;h=[% d.sha.sha %]" title="patch">p</a></td>
+            </td>
+            <td>[% prepared_datapoints.${d.sha.sha}.opac %]</td>
+            <td>[% prepared_datapoints.${d.sha.sha}.opac_detail %]</td>
+            <td>[% prepared_datapoints.${d.sha.sha}.intra %]</td>
+        </tr>
+        [% SET current_sha = d.sha.sha %]
+        [% END %]
+    [% END %]
+    </table>
+[% ELSE %]
+    <p>Ooops, no data here!</p>
+[% END %]
