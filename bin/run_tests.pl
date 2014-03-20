@@ -9,7 +9,7 @@ performance tests for each new commit.
 
 =head1 SYNOPSIS
 
-    perl kohaprofile.pl -c myconfig.yaml -v > /tmp/kohaprof.html
+    perl kohaprofile.pl -c myconfig.yaml -m "With Plack" -v > /tmp/kohaprof.html
 
 =cut
 
@@ -28,7 +28,7 @@ use WWW::Mechanize::Timed;
 use Modern::Perl;
 
 # Get options
-my ( $config_file, $verbose, $debug ) = get_options();
+my ( $config_file, $run_comment, $verbose, $debug ) = get_options();
 
 # Read the config
 if ( $config_file eq '' ) {
@@ -55,7 +55,8 @@ $git->checkout( $config->{'branch'} );
 
 # Record the run in the database
 my $run = resultset('Run')->create({
-    branch => $config->{'branch'},
+    branch  => $config->{'branch'},
+    comment => $run_comment,
 });
 
 # Get the commits we want and walk through them
@@ -117,6 +118,10 @@ $git->checkout( 'master' );
 
 Path to config file, if you want to use another config file than the default one.
 
+=item B<-m --comment>
+
+A text string that will be saved and displayed along with other run data. 
+
 =item B<-v --verbose>
 
 More verbose output.
@@ -137,20 +142,22 @@ sub get_options {
 
     # Options
     my $config_file = '';
+    my $run_comment = '';
     my $verbose     = '';
     my $debug       = '';
     my $help        = '';
 
     GetOptions (
-        'c|config=s' => \$config_file,
-        'v|verbose'  => \$verbose,
-        'd|debug'    => \$debug,
-        'h|?|help'   => \$help
+        'c|config=s'  => \$config_file,
+        'm|comment=s' => \$run_comment,
+        'v|verbose'   => \$verbose,
+        'd|debug'     => \$debug,
+        'h|?|help'    => \$help
     );
 
     pod2usage( -exitval => 0 ) if $help;
 
-    return ( $config_file, $verbose, $debug );
+    return ( $config_file, $run_comment, $verbose, $debug );
 
 }
 

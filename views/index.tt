@@ -11,6 +11,7 @@
             <li><a href="/run/[% run.id %]/[% method %]">[% method %]</a></li>
         [% END %]
         </ul>
+        [% run.comment %]
     </span>
 </li>
 [% END %]

@@ -41,6 +41,11 @@ __PACKAGE__->table("runs");
   is_auto_increment: 1
   is_nullable: 0
 
+=head2 comment
+
+  data_type: 'text'
+  is_nullable: 1
+
 =head2 started
 
   data_type: 'timestamp'
@@ -59,6 +64,8 @@ __PACKAGE__->table("runs");
 __PACKAGE__->add_columns(
   "id",
   { data_type => "integer", is_auto_increment => 1, is_nullable => 0 },
+  "comment",
+  { data_type => "text", is_nullable => 1 },
   "started",
   {
     data_type => "timestamp",
@@ -100,8 +107,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-03-19 10:08:39
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:vwNoh/mN3snTBZY5f+UmbA
+# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-03-20 11:08:38
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:9CAHDvbYbFDGph3QykGZ1Q
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
