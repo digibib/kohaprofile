@@ -26,7 +26,12 @@
 
 
 <div class="footer">
-    <p><a href="https://github.com/digibib/kohaprofile">KohaProfile</a>, powered by <a href="http://getbootstrap.com/">Bootstrap</a> and <a href="http://perldancer.org/">Dancer2</a> v[% dancer_version %].</p>
+    <p>
+        <a href="https://github.com/digibib/kohaprofile">KohaProfile</a>, powered by 
+        <a href="http://getbootstrap.com/">Bootstrap</a>, 
+        <a href="http://www.flotcharts.org/">Flot</a> and 
+        <a href="http://perldancer.org/">Dancer2</a> v[% dancer_version %].
+    </p>
 </div>
 
   </body>
