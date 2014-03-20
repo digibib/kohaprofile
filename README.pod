@@ -24,28 +24,6 @@ changes in performance.
 
 The configuration is stored in a YAML file, see default-config.yaml for an example. 
 
-=head1 IDEAS
-
-=over 4
-
-=item * Add some kind of progress indicator
-
-=item * Make it possible to run the tests against just one URL, or a user configurable list
-
-=item * Use the scripts in misc/load_testing/ for performing the tests
-
-=item * Include transactions in the staff interface, like check out and check in
-
-=item * Output the data in a way that can be rendered as a pretty graph
-
-=item * Improve the statistics around the time measurements (e.g. remove the fastest and the slowest response)
-
-=item * Save the data about tests in a database, so we can build up lots of data over time
-
-=item * Create a Dancer-app or something similar that can query the database and display data dynamically
-
-=back
-
 =head1 AUTHOR
 
 =over 4
