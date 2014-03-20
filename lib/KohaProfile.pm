@@ -38,19 +38,15 @@ get '/api/run/:id/:method' => sub {
     # Create a map from test names to an array of values
     my %names_and_values;
     foreach my $dp ( @datapoints ) {
-        push @{ $names_and_values{ $dp->name } }, $dp->get_column('avg_time');
+        my @point = ( $dp->sha->sha, $dp->get_column('avg_time') );
+        push @{ $names_and_values{ $dp->name } }, \@point;
     }
     # Turn the previous data structure into an array of hashes, that Flot can consume
     my @array_of_hashes;
     foreach my $name ( sort keys %names_and_values ) {
         my %data;
         $data{ 'label' } = $name;
-        my $counter = 0;
-        foreach my $value ( @{ $names_and_values{ $name } } ) {
-            my @point = ( $counter, $value );
-            push @{ $data{ 'data' } }, \@point;
-            $counter++;
-        }
+        $data{ 'data' }  = $names_and_values{ $name };
         push @array_of_hashes, \%data;
     }
     return to_json( \@array_of_hashes );
