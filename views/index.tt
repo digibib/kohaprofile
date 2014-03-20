@@ -1,22 +1,17 @@
 <h1>Runs</h1>
 
-<table>
-<tr>
-    <th>ID</th>
-    <th>Started</th>
-    <th>Branch</th>
-    <th>Method</th>
-</tr>
+<div class="list-group">
 [% FOREACH run IN runs %]
-<tr>
-    <td>[% run.id %]</td>
-    <td>[% run.started %]</td>
-    <td>[% run.branch %]</td>
-    <td>
+<li class="list-group-item">
+    [% run.started %] on [% run.branch %]
+    <span class="dropdown">
+        <a href="#" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" role="button" id="drop[% run.id %]">Methods <b class="caret"></b></a>
+        <ul class="dropdown-menu" id="methodmenu[% run.id %]" role="menu" aria-labelledby="dLabel">
         [% FOREACH method IN [ "client_request_connect_time" "client_request_transmit_time" "client_response_server_time" "client_response_receive_time" "client_total_time" "client_elapsed_time" ] %]
-            <a href="/run/[% run.id %]/[% method %]">[% method %]</a> | 
+            <li><a href="/run/[% run.id %]/[% method %]">[% method %]</a></li>
         [% END %]
-    </td>
-</tr>
+        </ul>
+    </span>
+</li>
 [% END %]
-</table>
+</div>
