@@ -54,6 +54,11 @@ __PACKAGE__->table("datapoints");
   is_nullable: 0
   size: 40
 
+=head2 sha_order
+
+  data_type: 'integer'
+  is_nullable: 0
+
 =head2 name
 
   data_type: 'varchar'
@@ -87,6 +92,8 @@ __PACKAGE__->add_columns(
   { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "sha",
   { data_type => "char", is_foreign_key => 1, is_nullable => 0, size => 40 },
+  "sha_order",
+  { data_type => "integer", is_nullable => 0 },
   "name",
   { data_type => "varchar", is_nullable => 0, size => 128 },
   "method",
@@ -147,8 +154,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-03-19 10:22:38
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:jwCStxrejfW1Q088WaKSLQ
+# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-03-20 10:45:05
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:2KyLrQVua3wGCDi2cda89g
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

@@ -60,6 +60,7 @@ my $run = resultset('Run')->create({
 
 # Get the commits we want and walk through them
 my @shas = $git->rev_list( { max_count => $config->{'max_count'} }, 'HEAD' );
+my $sha_order = 0;
 while ( @shas ) {
 
     # Get the SHA of the current commit
@@ -89,17 +90,19 @@ while ( @shas ) {
             # Record each of the datapoints in the database
             foreach my $method ( qw( client_request_connect_time client_request_transmit_time client_response_server_time client_response_receive_time client_total_time client_elapsed_time ) ) {
                 my $datapoint = resultset('Datapoint')->create({
-                    run_id => $run->id,
-                    sha    => $sha,
-                    name   => $test_name,
-                    method => $method,
-                    value  => $timer->$method,
+                    run_id    => $run->id,
+                    sha       => $sha,
+                    sha_order => $sha_order,
+                    name      => $test_name,
+                    method    => $method,
+                    value     => $timer->$method,
                 });
                 say STDERR "$method: " . $timer->$method if $debug;
             }
         }
         
     }
+    $sha_order++;
     
 }
 

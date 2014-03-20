@@ -67,6 +67,7 @@ sub _get_datapoints_for_run {
             { avg => 'value', -as => 'avg_time' }
         ],
         group_by => [qw/ sha name /],
+        order_by => [qw/ sha_order /],
     });
     
     return @datapoints;
