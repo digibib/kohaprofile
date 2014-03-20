@@ -10,16 +10,44 @@
             var options = {
                 lines: { show: true },
                 points: { show: true },
+                grid: {
+				    hoverable: true
+			    },
                 xaxis: { tickDecimals: 0, tickSize: 1 }
             };
     		$.plot(placeholder, data, options);
+		});
+
+		$("<div id='tooltip'></div>").css({
+			position: "absolute",
+			display: "none",
+			border: "1px solid #fdd",
+			padding: "2px",
+			"background-color": "#fee",
+			opacity: 0.80
+		}).appendTo("body");
+
+		$("#graph").bind("plothover", function (event, pos, item) {
+
+			// if ($("#enableTooltip:checked").length > 0) {
+				if (item) {
+					var x = item.datapoint[0].toFixed(2),
+						y = item.datapoint[1].toFixed(2);
+
+					$("#tooltip").html(item.series.label + " | " + x + " = " + y)
+						.css({top: item.pageY+5, left: item.pageX+5})
+						.fadeIn(200);
+				} else {
+					$("#tooltip").hide();
+				}
+			// }
 		});
 
 	});
 
 </script>
 
-<div id="graph" style="width:600px;height:300px"></div>
+<div id="graph" style="width:800px;height:300px"></div>
 
 [% IF run.datapoints.size %]
     <table border="1">
