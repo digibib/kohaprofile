@@ -61,12 +61,12 @@ my $run = resultset('Run')->create({
 
 # Get the commits we want and walk through them
 my @shas = $git->rev_list( { max_count => $config->{'max_count'} }, 'HEAD' );
-my $sha_order = 0;
+my $sha_order = 1;
 while ( @shas ) {
 
     # Get the SHA of the current commit
     my $sha = pop @shas;
-    say STDERR $sha if $verbose;
+    print STDERR "$sha_order $sha " if $verbose;
     # Check ut this SHA
     $git->checkout( $sha );
     # Record the SHA in the database
@@ -77,6 +77,17 @@ while ( @shas ) {
         # FIXME Get the title for the commit
         $db_sha->set_column( 'title', 'FIXME' );
         $db_sha->insert;
+    }
+
+    # Check if we should skip ahead
+    if ( $config->{'test_every'} ) {
+        if ( $sha_order != 1 && $sha_order % $config->{'test_every'} != 0 ) {
+            $sha_order++; # FIXME Not very elegant
+            say "skipped";
+            next;
+        } else {
+            say "tested";
+        }
     }
 
     # Run the timers
