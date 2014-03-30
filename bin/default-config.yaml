@@ -26,6 +26,10 @@ max_count: 3
 # statstically significant our results will be. 
 iterations: 2
 
+# To save some time we just test every x commit, and skip over the ones in 
+# between. Set this to 1 if you want to test every commit. 
+test_every: 10
+
 # What should we actually measure? 
 # Possible values (from http://search.cpan.org/~lbrocard/WWW-Mechanize-Timed-0.44/lib/WWW/Mechanize/Timed.pm):
 # 
